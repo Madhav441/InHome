@@ -22,12 +22,6 @@ npm install
 npm run build
 ```
 
-> **Note**
-> The sandbox environment that powers this repository does not permit outbound access to the public npm registry. To keep
-> install commands working we ship lightweight offline stubs for `typescript` and `@types/node` under `vendor/`. They satisfy
-> tooling expectations during local development while you work on the architecture. If you plan to run the project outside
-> the sandbox you can switch the devDependencies back to the official packages by editing `package.json`.
-
 The Go desktop agent can be built independently:
 
 ```bash
@@ -36,10 +30,3 @@ go build ./...
 ```
 
 Refer to `docs/ARCHITECTURE.md` for the roadmap and component overview.
-
-## Deployment & Testing
-
-- See `docs/DEPLOYMENT_AND_TESTING.md` for detailed setup, deployment, and
-  manual test procedures across the self-hosted, SaaS, and hybrid offerings.
-- The guide also lists functional test scripts that can be executed with Node
-  after building the workspace, as well as future automation targets.

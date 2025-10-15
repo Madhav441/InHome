@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@inhome/core": ["packages/core/src"],
+      "@inhome/command-bus": ["features/command-bus/src"],
+      "@inhome/enrollment": ["features/enrollment/src"],
+      "@inhome/policy-dsl": ["features/policy-dsl/src"],
+      "@inhome/apple-mdm-adapter": ["packages/adapters/apple-mdm/src"],
+      "@inhome/android-mdm-adapter": ["packages/adapters/android-mdm/src"],
+      "@inhome/persistence-adapter": ["packages/adapters/persistence/src"],
+      "@inhome/auth-billing-adapter": ["packages/adapters/auth-billing/src"],
+      "@inhome/remote-access-adapter": ["packages/adapters/remote-access/src"],
+      "@inhome/transport-adapter": ["packages/adapters/transport/src"]
+    }
+  },
+  "include": ["packages/**/*.ts", "features/**/*.ts", "apps/**/*.ts", "ui/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,6 @@
+node_modules/
+dist/
+infra/secrets/*
+!infra/secrets/
+!infra/secrets/README.md
+infra/*/.env

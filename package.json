@@ -1,0 +1,22 @@
+{
+  "name": "inhome-platform",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Unified MDM control plane with modular adapters for Apple, Android, and Desktop endpoints.",
+  "scripts": {
+    "build": "tsc -b",
+    "lint": "eslint .",
+    "test": "echo 'No tests yet'"
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/adapters/*",
+    "features/*",
+    "apps/*",
+    "ui/*"
+  ],
+  "devDependencies": {
+    "@types/node": "file:vendor/types-node",
+    "typescript": "file:vendor/typescript"
+  }
+}

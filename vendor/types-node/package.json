@@ -1,0 +1,7 @@
+{
+  "name": "@types/node",
+  "version": "20.11.30-local",
+  "description": "Minimal Node.js type stubs for offline development.",
+  "types": "index.d.ts",
+  "license": "MIT"
+}

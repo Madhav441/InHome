@@ -1,0 +1,17 @@
+{
+  "name": "@inhome/app-self-host",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@inhome/core": "^0.1.0",
+    "@inhome/command-bus": "^0.1.0",
+    "@inhome/enrollment": "^0.1.0",
+    "@inhome/persistence-adapter": "^0.1.0",
+    "@inhome/policy-dsl": "^0.1.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  }
+}

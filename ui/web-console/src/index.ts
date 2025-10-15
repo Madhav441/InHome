@@ -33,20 +33,22 @@ export const toDashboardViewModel = (
   policies: Policy[],
   commands: Command[]
 ): DashboardViewModel => ({
-  devices: devices.map((device) => ({
+  devices: devices.map((device: Device) => ({
     id: device.id,
     platform: device.platform,
     owner: device.owner.displayName ?? device.owner.tenantId,
     status: device.status,
     lastCheckIn: device.lastCheckIn,
   })),
-  policies: policies.map((policy) => ({
+  policies: policies.map((policy: Policy) => ({
     id: policy.id,
     name: policy.name,
     version: policy.version,
-    targets: policy.targets.map((target) => `${target.type}:${target.id}`),
+    targets: policy.targets.map(
+      (target: Policy['targets'][number]) => `${target.type}:${target.id}`
+    ),
   })),
-  commands: commands.map((command) => ({
+  commands: commands.map((command: Command) => ({
     id: command.id,
     deviceId: command.deviceId,
     name: command.name,

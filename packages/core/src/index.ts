@@ -1,9 +1,9 @@
-export type Platform = 'apple' | 'android' | 'desktop';
+export type Platform = 'apple' | 'android' | 'windows' | 'other';
 
 export type EnrollmentChannel = 'mdm' | 'agent' | 'dep' | 'qr';
 
 export interface DeviceToken {
-  type: 'apns' | 'fcm' | 'websocket' | 'polling';
+  type: 'apns' | 'fcm' | 'wns' | 'websocket' | 'polling';
   value: string;
   expiresAt?: string;
 }

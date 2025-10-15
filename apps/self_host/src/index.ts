@@ -1,8 +1,8 @@
 import { InMemoryCommandBus } from '@inhome/command-bus';
 import { InMemoryEnrollmentService } from '@inhome/enrollment';
 import { InMemoryPersistence } from '@inhome/persistence-adapter';
-import { PolicyDefinition, projectRules } from '@inhome/policy-dsl';
-import { Command, Device, ISODate, Policy } from '@inhome/core';
+import { ActionType, PolicyDefinition, projectRules } from '@inhome/policy-dsl';
+import { Command, Device, ISODate, Policy, PolicyRule } from '@inhome/core';
 
 export interface SelfHostContext {
   persistence: InMemoryPersistence;
@@ -36,11 +36,11 @@ const policyToDefinition = (policy: Policy): PolicyDefinition => ({
   name: policy.name,
   version: policy.version,
   targets: policy.targets,
-  rules: policy.rules.map((rule) => ({
+  rules: policy.rules.map((rule: PolicyRule) => ({
     id: rule.id,
     description: rule.description,
     platforms: [rule.platform],
-    actions: rule.definition.actions ?? [],
+    actions: (rule.definition as { actions?: ActionType[] }).actions ?? [],
   })),
 });
 

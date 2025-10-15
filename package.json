@@ -16,7 +16,7 @@
     "ui/*"
   ],
   "devDependencies": {
-    "@types/node": "20.11.30",
-    "typescript": "5.4.5"
+    "@types/node": "file:vendor/types-node",
+    "typescript": "file:vendor/typescript"
   }
 }

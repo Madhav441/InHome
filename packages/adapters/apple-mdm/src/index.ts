@@ -7,6 +7,7 @@ import {
   ISODate,
   Platform,
   Policy,
+  PolicyRule,
   PolicyRenderer,
   ProfileArtifact,
   ProfileService,
@@ -156,9 +157,11 @@ export class AppleProfileRenderer implements PolicyRenderer<ProfileArtifact> {
 
 export const buildConfigurationProfile = (policy: Policy): string => {
   const payloadContent = policy.rules
-    .filter((rule) => rule.platform === 'apple' || rule.platform === 'any')
-    .map((rule) => rule.definition.actions)
-    .flat();
+    .filter((rule: PolicyRule) => rule.platform === 'apple' || rule.platform === 'any')
+    .flatMap((rule: PolicyRule) => {
+      const definition = rule.definition as { actions?: unknown[] };
+      return Array.isArray(definition.actions) ? definition.actions : [];
+    });
 
   const profile = {
     PayloadContent: payloadContent,
@@ -169,7 +172,7 @@ export const buildConfigurationProfile = (policy: Policy): string => {
     PayloadVersion: policy.version,
   };
 
-  return plist(payload);
+  return plist(profile);
 };
 
 const plist = (input: Record<string, unknown>): string => {

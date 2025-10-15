@@ -1,2 +1,32 @@
-# InHome
-An out of the box home device which can be SaaS-hosted, or on-Device connected to your Wifi or directly to router, providing out of the box functionality to deploy in your home, sign-up devices and manage seamlessly. It aims to enable multi device sign-up without an enterprise level account.
+# InHome Unified MDM Platform
+
+This repository bootstraps the InHome MDM control plane with a modular architecture that supports self-hosted, SaaS, and hybrid deployments while sharing a common core. The project is organized as a multi-package workspace so the same domain models and services can be reused across offerings.
+
+## Structure
+
+- `packages/core` – Shared domain models (devices, commands, policies, tenants) and service interfaces.
+- `packages/adapters` – Swap-in integrations for Apple MDM, transports, persistence, auth/billing, and remote access.
+- `features` – Policy DSL, command bus, and enrollment service implementations.
+- `apps` – Composition roots for self-hosted, SaaS, and hybrid product modes.
+- `ui/web-console` – View-model helpers for the unified admin console.
+- `agents/desktop` – Go desktop agent skeleton used in the desktop-first MVP.
+- `infra` – Deployment scaffolding for Docker Compose and Kubernetes.
+- `docs` – Architecture notes and planning guides.
+
+## Getting Started
+
+Install dependencies and build the TypeScript packages:
+
+```bash
+npm install
+npm run build
+```
+
+The Go desktop agent can be built independently:
+
+```bash
+cd agents/desktop
+go build ./...
+```
+
+Refer to `docs/ARCHITECTURE.md` for the roadmap and component overview.

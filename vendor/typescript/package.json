@@ -1,0 +1,10 @@
+{
+  "name": "typescript",
+  "version": "5.4.5-local",
+  "description": "Offline stub of the TypeScript compiler for sandbox development.",
+  "bin": {
+    "tsc": "./bin/tsc.js"
+  },
+  "main": "./bin/tsc.js",
+  "license": "MIT"
+}

@@ -73,6 +73,7 @@ func main() {
 		fmt.Printf("failed to report facts: %v\n", err)
 	}
 
+	// Tick loop: poll command endpoint on each tick
 	for range ticker.C {
 		commands, err := pollCommands(endpoint)
 		if err != nil {

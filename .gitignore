@@ -3,4 +3,8 @@ dist/
 infra/secrets/*
 !infra/secrets/
 !infra/secrets/README.md
+ 
+# Ignore Windows binaries and local build outputs
+agents/desktop/desktop.exe
+*.exe
 infra/*/.env

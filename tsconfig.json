@@ -21,7 +21,8 @@
       "@inhome/persistence-adapter": ["packages/adapters/persistence/src"],
       "@inhome/auth-billing-adapter": ["packages/adapters/auth-billing/src"],
       "@inhome/remote-access-adapter": ["packages/adapters/remote-access/src"],
-      "@inhome/transport-adapter": ["packages/adapters/transport/src"]
+      "@inhome/transport-adapter": ["packages/adapters/transport/src"],
+      "@inhome/platform-api": ["packages/api/src"]
     }
   },
   "include": ["packages/**/*.ts", "features/**/*.ts", "apps/**/*.ts", "ui/**/*.ts"],

@@ -265,7 +265,7 @@ Each application under `apps/` composes the shared services differently. The sec
 
 ## End-user guides
 
-- `docs/guides/enroll-apple-home.md` — Apple manual enrollment (no ABM).
+- `docs/guides/enroll-apple-home.md` — Apple enrollment tracks (parental controls app, manual MDM, Configurator supervision). Includes usage of `scripts/apple/configurator-helper.sh`.
 - `docs/guides/enroll-android-home.md` — Android AMA approval + QR enrollment.
 - `docs/guides/enroll-windows-home.md` — Windows agent install and check-in.
 - `docs/guides/appliance-quickstart.md` — Plug-in appliance setup and first-run wizard.

@@ -3,6 +3,7 @@
 Use these endpoint shapes to guide implementation. All endpoints are tenant-scoped.
 
 ## Apple
+- Implementation scaffolding lives in `packages/api/src/apple.ts`. Each handler currently returns stubbed data and documents the expected request/response contracts.
 - POST /api/apple/mdm/enrollment-profile
   - body: { displayName, topic, ttl }
   - returns: { profilePlistBase64, downloadUrl }

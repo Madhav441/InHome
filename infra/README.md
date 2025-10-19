@@ -31,6 +31,15 @@ pre-commit install
 
 Policy is configured via `.pre-commit-config.yaml` and `gitleaks.toml` (defaults + allowlist for `dist/`, `node_modules/`, `infra/secrets/`, `vendor/`).
 
+## Apple Configurator helper
+For supervised home enrollments without ABM, run the helper on a Mac:
+
+```bash
+./scripts/apple/configurator-helper.sh --portal https://tenant.example.com --output ~/Desktop/inhome-supervised.mobileconfig
+```
+
+The script downloads the latest auto-enroll profile (or writes a placeholder) and prints the Configurator options to select.
+
 ## Notes
 - Never commit `.env` files or anything under `infra/secrets/**`.
 - Prefer GitHub Actions secrets for CI rather than committing files.

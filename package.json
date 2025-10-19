@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc -b",
     "smoke": "node scripts/ci/smoke.cjs",
+    "smoke:secrets": "node scripts/ci/secrets-smoke.cjs",
     "lint": "eslint .",
     "test": "echo 'No tests yet'"
   },

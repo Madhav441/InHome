@@ -33,6 +33,15 @@ jobs:
       - name: Run smoke scenarios
         run: npm run smoke
 
+      - name: Run secret-backed smoke tests
+        if: ${{ secrets.INHOME_APNS_KEY_PEM != '' && secrets.INHOME_FCM_SERVICE_ACCOUNT_JSON != '' && secrets.INHOME_WINDOWS_CERT_PFX_BASE64 != '' && secrets.INHOME_WINDOWS_CERT_PASSWORD != '' }}
+        env:
+          APNS_KEY_PEM: ${{ secrets.INHOME_APNS_KEY_PEM }}
+          FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.INHOME_FCM_SERVICE_ACCOUNT_JSON }}
+          WINDOWS_CERT_PFX_BASE64: ${{ secrets.INHOME_WINDOWS_CERT_PFX_BASE64 }}
+          WINDOWS_CERT_PASSWORD: ${{ secrets.INHOME_WINDOWS_CERT_PASSWORD }}
+        run: npm run smoke:secrets
+
   go-agent:
     name: Go Desktop Agent
     runs-on: windows-latest

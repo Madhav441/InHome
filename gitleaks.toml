@@ -1,0 +1,13 @@
+title = "InHome gitleaks policy"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ignore generated and placeholder assets"
+paths = [
+  "^dist/",
+  "^node_modules/",
+  "^infra/secrets/",
+  "^vendor/"
+]

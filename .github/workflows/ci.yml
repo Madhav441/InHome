@@ -56,5 +56,6 @@ jobs:
     # Step 3: Build Go agent
     - name: Build Go agent
       run: |
+        export CGO_ENABLED=0
         cd agents/desktop
         go build ./...

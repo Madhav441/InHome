@@ -8,6 +8,10 @@ This roadmap translates the unified architecture into actionable milestones acro
 - ✅ In-memory command bus, enrollment manager, and policy DSL scaffolding.
 - ✅ Windows agent skeleton compiled in Go with command queue integration.
 - ✅ Apple and Android adapters wired to the shared command bus and policy renderer interfaces.
+
+---
+
+For a minute-by-minute local and CI validation checklist, see `docs/FIRST_TEST.md`.
 - ✅ Deployment playbook covering self-hosted, SaaS, and hybrid compositions.
 
 ## Phase 1 – Apple & Android GA 🟡

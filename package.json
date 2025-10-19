@@ -5,6 +5,7 @@
   "description": "Unified MDM control plane with modular adapters for Apple, Android, and Desktop endpoints.",
   "scripts": {
     "build": "tsc -b",
+    "smoke": "node scripts/ci/smoke.cjs",
     "lint": "eslint .",
     "test": "echo 'No tests yet'"
   },
@@ -16,7 +17,7 @@
     "ui/*"
   ],
   "devDependencies": {
-  "@types/node": "^22.7.0",
-  "typescript": "^5.3.3"
+    "@types/node": "^22.7.0",
+    "typescript": "^5.3.3"
   }
 }

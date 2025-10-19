@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
@@ -7,54 +7,53 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  typescript:
+    name: TypeScript Workspace
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x] # Test against multiple Node.js versions
-
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # Step 2: Set up Node.js
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
 
-    # Step 3: Install dependencies
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
 
-    # Step 4: Build the project
-    - name: Build the project
-      run: npm run build
+      - name: Build TypeScript workspace
+        run: npm run build
 
-    # Step 5: Run tests
-    - name: Run tests
-      run: npm test
+      - name: Run smoke scenarios
+        run: npm run smoke
 
   go-agent:
+    name: Go Desktop Agent
     runs-on: windows-latest
 
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # Step 2: Set up Go
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: "1.22.x"
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22.x"
 
-    # Step 3: Build Go agent
-    - name: Build Go agent
-      run: |
-        cd agents/desktop
-        go build ./...
+      - name: Run Go tests
+        working-directory: agents/desktop
+        run: go test ./...
+
+      - name: Vet Go packages
+        working-directory: agents/desktop
+        run: go vet ./...
+
+      - name: Build Go agent
+        working-directory: agents/desktop
+        run: go build ./...

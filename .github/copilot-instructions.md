@@ -62,3 +62,5 @@ The InHome Unified MDM Platform is a modular, multi-package workspace designed t
 - `infra/docker-compose/README.md`: Docker Compose setup.
  - `infra/README.md`: Env templates, CI secrets, and gitleaks usage.
  - `docs/PROJECT_LOG.md`: Single source of truth for TODOs, changes, and next steps. Always update relevant docs with each change.
+ - `docs/CUSTOMER_CAPABILITIES.md`: What customers can do, per-mode responsibilities.
+ - `docs/guides/*`: Customer-facing enrollment and appliance quickstart guides.

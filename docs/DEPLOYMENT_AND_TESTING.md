@@ -263,6 +263,13 @@ Each application under `apps/` composes the shared services differently. The sec
 2. Configure environment variables for certificate paths and any relay endpoints as described earlier.
 3. Use the self-hosted bootstrap script to enqueue commands and then extend the agent to poll the command bus. As the agent evolves, add integration tests that execute commands locally and report acknowledgements via the `acknowledgeCommand` API.
 
+## End-user guides
+
+- `docs/guides/enroll-apple-home.md` — Apple manual enrollment (no ABM).
+- `docs/guides/enroll-android-home.md` — Android AMA approval + QR enrollment.
+- `docs/guides/enroll-windows-home.md` — Windows agent install and check-in.
+- `docs/guides/appliance-quickstart.md` — Plug-in appliance setup and first-run wizard.
+
 ## Functional Test Matrix
 
 | Test | Goal | How to execute | Expected outcome |

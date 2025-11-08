@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "module": "CommonJS",
     "moduleResolution": "Node",
     "declaration": true,
@@ -12,19 +12,24 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@inhome/core": ["packages/core/src"],
-      "@inhome/command-bus": ["features/command-bus/src"],
-      "@inhome/enrollment": ["features/enrollment/src"],
-      "@inhome/policy-dsl": ["features/policy-dsl/src"],
-      "@inhome/apple-mdm-adapter": ["packages/adapters/apple-mdm/src"],
-      "@inhome/android-mdm-adapter": ["packages/adapters/android-mdm/src"],
-      "@inhome/persistence-adapter": ["packages/adapters/persistence/src"],
-      "@inhome/auth-billing-adapter": ["packages/adapters/auth-billing/src"],
-      "@inhome/remote-access-adapter": ["packages/adapters/remote-access/src"],
-      "@inhome/transport-adapter": ["packages/adapters/transport/src"],
-      "@inhome/platform-api": ["packages/api/src"]
+      "@sentinel-au/sdk-web": ["packages/sdk-web/src"],
+      "@sentinel-au/sdk-node": ["packages/sdk-node/src"],
+      "@sentinel-au/sdk-android": ["packages/sdk-android/src"],
+      "@sentinel-au/sdk-ios": ["packages/sdk-ios/src"],
+      "@sentinel-au/sdk-extension": ["packages/sdk-extension/src"],
+      "@sentinel-au/policy-engine": ["services/policy-engine/src"],
+      "@sentinel-au/api-types": ["services/api/src/contracts"],
+      "@sentinel-au/config": ["packages/config/src"]
     }
   },
-  "include": ["packages/**/*.ts", "features/**/*.ts", "apps/**/*.ts", "ui/**/*.ts"],
+  "include": [
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "services/**/*.ts",
+    "services/**/*.tsx",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "tools/**/*.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

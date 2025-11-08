@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Sentinel AU Guardian",
+  "description": "Applies SafeSearch, URL telemetry, and policy sync for Sentinel AU.",
+  "version": "0.1.0",
+  "permissions": ["storage", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "action": {
+    "default_title": "Sentinel AU"
+  },
+  "optional_permissions": ["history"]
+}

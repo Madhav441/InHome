@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  api:
+    build:
+      context: ../../
+      dockerfile: deploy/docker/nest.Dockerfile
+    environment:
+      PORT: 4000
+    ports:
+      - '4000:4000'
+  web:
+    build:
+      context: ../../
+      dockerfile: deploy/docker/web.Dockerfile
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:4000/v1
+      NEXT_PUBLIC_WS_BASE_URL: ws://localhost:4000
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api
+  telemetry:
+    build:
+      context: ../../
+      dockerfile: deploy/docker/telemetry.Dockerfile
+    ports:
+      - '4100:4100'
+  classifier:
+    build:
+      context: ../../
+      dockerfile: deploy/docker/classifier.Dockerfile
+    ports:
+      - '4300:4300'

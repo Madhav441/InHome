@@ -1,10 +1,14 @@
 node_modules/
+.pnpm-store/
+.next/
 dist/
-infra/secrets/*
-!infra/secrets/
-!infra/secrets/README.md
- 
-# Ignore Windows binaries and local build outputs
-agents/desktop/desktop.exe
-*.exe
-infra/*/.env
+build/
+out/
+*.log
+.env
+.env.local
+apps/**/.expo/
+apps/**/android/build/
+apps/**/ios/build/
+.DS_Store
+coverage/

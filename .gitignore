@@ -12,3 +12,18 @@ apps/**/android/build/
 apps/**/ios/build/
 .DS_Store
 coverage/
+
+# IDE/editor
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Go/Windows binaries
+*.exe
+*.dll
+*.pdb
+*.test
+agents/**/desktop.exe

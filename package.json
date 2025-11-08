@@ -11,7 +11,9 @@
     "test": "turbo test",
     "format": "prettier --write .",
     "typecheck": "turbo typecheck",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "smoke": "node scripts/ci/smoke.cjs",
+    "smoke:secrets": "node scripts/ci/secrets-smoke.cjs"
   },
   "workspaces": [
     "apps/*",

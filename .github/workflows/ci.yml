@@ -22,16 +22,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
-          cache: "npm"
+          cache: "pnpm"
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.10.0
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build TypeScript workspace
-        run: npm run build
+        run: pnpm run build
 
       - name: Run smoke scenarios
-        run: npm run smoke
+        run: pnpm run smoke
 
       - name: Run secret-backed smoke tests
         if: ${{ secrets.INHOME_APNS_KEY_PEM && secrets.INHOME_FCM_SERVICE_ACCOUNT_JSON && secrets.INHOME_WINDOWS_CERT_PFX_BASE64 && secrets.INHOME_WINDOWS_CERT_PASSWORD }}
@@ -40,7 +45,7 @@ jobs:
           FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.INHOME_FCM_SERVICE_ACCOUNT_JSON }}
           WINDOWS_CERT_PFX_BASE64: ${{ secrets.INHOME_WINDOWS_CERT_PFX_BASE64 }}
           WINDOWS_CERT_PASSWORD: ${{ secrets.INHOME_WINDOWS_CERT_PASSWORD }}
-        run: npm run smoke:secrets
+        run: pnpm run smoke:secrets
 
   go-agent:
     name: Go Desktop Agent

@@ -12,6 +12,8 @@ apps/**/android/build/
 apps/**/ios/build/
 .DS_Store
 coverage/
+.turbo/
+**/tsconfig.tsbuildinfo
 
 # IDE/editor
 .vscode/

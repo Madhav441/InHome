@@ -2,16 +2,32 @@
 
 Sentinel AU is an open-source family safety platform designed for Australian families and carers. The project ships a multi-tenant SaaS stack that can also be self-hosted. It focuses on transparency, parental consent, and alignment with the Australian Privacy Principles (APPs) and eSafety guidance.
 
+## Prerequisites
+
+- **Node.js** ≥ 18.17 (recommended LTS 20 or 22). On Windows you can install via `winget install OpenJS.NodeJS.LTS`.
+- **pnpm** 9 (`npm i -g pnpm` if Corepack is unavailable).
+- **Go** ≥ 1.20 for the Windows desktop agent.
+- **Docker** (optional) for the Compose demo.
+- Optional platform SDKs: Android Studio (SDK 35), Xcode 15 for native agents.
+
 ## Quick start
 
-The monorepo uses [Turborepo](https://turbo.build/) with [pnpm](https://pnpm.io). Ensure pnpm 9 is installed, then bootstrap the workspace:
+Bootstrap the monorepo with Turborepo + pnpm:
 
 ```bash
 pnpm install
-pnpm turbo run build
+pnpm run build
+pnpm run smoke
 ```
 
-For a local, all-in-one demonstration run:
+To develop against the in-memory control plane:
+
+```bash
+pnpm --filter apps/self_host run dev   # API + policy + telemetry bundle
+pnpm --filter apps/web dev             # Next.js web console (http://localhost:3000)
+```
+
+If you prefer using Docker Compose for an all-in-one demo:
 
 ```bash
 cd deploy/docker
@@ -19,7 +35,27 @@ cp .env.example .env
 pnpm run compose:up
 ```
 
-The web dashboard will be available at <http://localhost:3000> using the seeded account `demo@example.com` / `demo123`. The compose stack is intentionally lightweight so it can run on a developer laptop while still demonstrating policy sync, telemetry ingestion, and alert fan-out.
+The web dashboard will be available at <http://localhost:3000> using the seeded account `demo@example.com` / `demo123`. The compose stack is intentionally lightweight so it runs on a developer laptop while still demonstrating policy sync, telemetry ingestion, and alert fan-out.
+
+## Secrets and environment configuration
+
+- Template env files live under `infra/*/example.env`. Copy to `.env` in the same folder and adjust values per deployment mode.
+- Secret material used during development (APNs keys, FCM credentials, Windows PFX) should live under `infra/secrets/`—the tree is already gitignored.
+- CI secrets map to the same names (`INHOME_APNS_KEY_PEM`, `INHOME_FCM_SERVICE_ACCOUNT_JSON`, etc.) and drive the `pnpm run smoke:secrets` workflow step.
+
+## Additional workflows
+
+- **Run smoke scenarios**: `pnpm run smoke`
+- **Secret-backed validation (requires env vars)**: `pnpm run smoke:secrets`
+- **Rebuild the Windows desktop agent** (requires restored Go sources in `agents/desktop`):
+
+  ```bash
+  cd agents/desktop
+  go build ./...
+  ```
+
+- **Format & lint**: `pnpm run format && pnpm run lint`
+- **Type checks**: `pnpm run typecheck`
 
 ## Repository structure
 
@@ -71,4 +107,3 @@ All code in the repository is licensed under the Apache 2.0 License. Individual 
 ## Contributing
 
 We welcome community contributions that improve transparency or extend regional support. Please review `docs/CONTRIBUTING.md` (to be completed) and follow the conventional commits format enforced by commitlint.
-

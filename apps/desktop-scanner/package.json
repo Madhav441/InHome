@@ -4,13 +4,13 @@
   "private": true,
   "main": "src/main.ts",
   "scripts": {
-    "start": "electron-ts",
+    "start": "electron -r ts-node/register ./src/main.ts",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "electron": "^31.0.2",
-    "electron-ts": "^1.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
 }

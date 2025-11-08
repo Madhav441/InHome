@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f7faf9;
+  color: #12312a;
+  min-height: 100vh;
+}

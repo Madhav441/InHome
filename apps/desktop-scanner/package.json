@@ -1,0 +1,16 @@
+{
+  "name": "@sentinel-au/desktop-scanner",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "electron-ts",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "electron": "^31.0.2",
+    "electron-ts": "^1.0.0",
+    "typescript": "^5.5.4"
+  }
+}

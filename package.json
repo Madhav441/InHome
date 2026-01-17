@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "typecheck": "turbo typecheck",
     "prepare": "husky install",
+    "compose:up": "docker compose -f deploy/docker/docker-compose.yml up --build",
     "smoke": "node scripts/ci/smoke.cjs",
     "smoke:secrets": "node scripts/ci/secrets-smoke.cjs"
   },

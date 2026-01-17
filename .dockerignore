@@ -1,0 +1,16 @@
+node_modules
+.pnpm-store
+.pnp.cjs
+.yarn
+.yarnrc
+.turbo
+**/dist
+**/build
+**/.next
+**/out
+**/.cache
+**/.DS_Store
+.git
+.gitignore
+.env
+.env.*

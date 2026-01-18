@@ -89,6 +89,17 @@ deploy/
 
 Each sub-project includes its own README with build/run instructions and compliance notes.
 
+## Documentation
+
+- **Deployment guide**: `docs/DEPLOYMENT.md`
+- **MVP next steps**: `docs/MVP_NEXT_STEPS.md`
+- **Enrollment flows**: `docs/ENROLLMENT_FLOWS.md`
+- **Enrollment automation**: `docs/ENROLLMENT_AUTOMATION.md`
+- **MDM integration plan**: `docs/MDM_INTEGRATION.md`
+- **SaaS tenancy separation**: `docs/SAAS_TENANCY.md`
+- **User manual (guardian)**: `docs/USER_MANUAL.md`
+- **Developer manual**: `docs/DEVELOPER_MANUAL.md`
+
 ## Compliance and ethics
 
 Sentinel AU emphasises privacy-by-design:

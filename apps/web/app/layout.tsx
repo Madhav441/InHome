@@ -7,20 +7,29 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Sentinel AU Dashboard',
-  description: 'Transparent, open-source family safety controls for Australian families.'
+  description:
+    'Transparent, open-source family safety controls for Australian families.',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={inter.className}>
       <body>
         <header className="border-b border-brand-100 bg-white/90 backdrop-blur">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
             <div>
-              <span className="text-lg font-semibold text-brand-700">Sentinel AU</span>
-              <p className="text-sm text-brand-500">Transparent family safety for Australia</p>
+              <span className="text-lg font-semibold text-brand-700">
+                Sentinel AU
+              </span>
+              <p className="text-sm text-brand-500">
+                Transparent family safety for Australia
+              </p>
             </div>
-            <nav className="flex gap-4 text-sm text-brand-600">
+            <nav className="flex flex-wrap gap-4 text-sm text-brand-600">
               <a href="/" className="hover:text-brand-800">
                 Dashboard
               </a>
@@ -33,12 +42,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/reports" className="hover:text-brand-800">
                 Reports
               </a>
+              <a href="/devices" className="hover:text-brand-800">
+                Devices
+              </a>
+              <a href="/pairing" className="hover:text-brand-800">
+                Pairing
+              </a>
+              <a href="/admin" className="hover:text-brand-800">
+                Operator
+              </a>
             </nav>
           </div>
         </header>
-        <main className="mx-auto min-h-[calc(100vh-4rem)] max-w-5xl px-6 py-8">{children}</main>
+        <main className="mx-auto min-h-[calc(100vh-4rem)] max-w-5xl px-6 py-8">
+          {children}
+        </main>
         <footer className="border-t border-brand-100 bg-white/90 py-4 text-center text-xs text-brand-500">
-          Built in accordance with the Australian Privacy Principles and eSafety guidance.
+          Built in accordance with the Australian Privacy Principles and eSafety
+          guidance.
         </footer>
       </body>
     </html>

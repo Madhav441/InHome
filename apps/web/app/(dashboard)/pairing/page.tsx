@@ -1,4 +1,69 @@
-import Image from 'next/image';
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+
+const assistedSteps = [
+  'Open the enrollment link on the helper Android device.',
+  'Sign in as the guardian and confirm consent details.',
+  'Configure Wi-Fi and verify the child profile details.',
+  'Start the managed setup on the child device using the pairing code.',
+];
+
+const managedSteps = [
+  'Factory reset the child device (if required by your MDM policy).',
+  'On first boot, scan the pairing QR code.',
+  'Install the Sentinel AU Android agent when prompted.',
+  'Confirm the policy bundle and device name.',
+];
+
+const platformOptions = ['Android', 'Android Enterprise', 'iPadOS', 'iOS'];
+const enrollmentModes = [
+  'Demo (in-memory)',
+  'Android Enterprise (MDM)',
+  'Apple DEP (MDM)',
+] as const;
+
+type EnrollmentMode = (typeof enrollmentModes)[number];
+
+type PairingSession = {
+  code: string;
+  expiresAt: number;
+  childName: string;
+  enrollmentMode: EnrollmentMode;
+};
+
+const formatExpiry = (expiresAt: number) => {
+  const remainingMs = Math.max(expiresAt - Date.now(), 0);
+  const minutes = Math.floor(remainingMs / 60000);
+  const seconds = Math.floor((remainingMs % 60000) / 1000);
+  return `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
+};
+
+const buildEnrollmentLink = (payload: {
+  code: string;
+  deviceName: string;
+  platform: string;
+  oneTap: boolean;
+  enrollmentMode: EnrollmentMode;
+}) => {
+  const params = new URLSearchParams();
+  params.set('code', payload.code);
+  if (payload.deviceName) {
+    params.set('deviceName', payload.deviceName);
+  }
+  if (payload.platform) {
+    params.set('platform', payload.platform);
+  }
+  if (payload.enrollmentMode) {
+    params.set('enrollmentMode', payload.enrollmentMode);
+  }
+  if (payload.oneTap) {
+    params.set('auto', '1');
+  }
+  return `/enroll?${params.toString()}`;
+};
 
 const assistedSteps = [
   'Open the enrollment link on the helper Android device.',
@@ -15,6 +80,121 @@ const managedSteps = [
 ];
 
 export default function PairingPage() {
+  const [session, setSession] = useState<PairingSession | null>(null);
+  const [childName, setChildName] = useState('Maya');
+  const [deviceName, setDeviceName] = useState("Ava's Pixel");
+  const [platform, setPlatform] = useState('Android');
+  const [enrollmentMode, setEnrollmentMode] =
+    useState<EnrollmentMode>('Demo (in-memory)');
+  const [oneTap, setOneTap] = useState(true);
+  const [status, setStatus] = useState('');
+  const [parentStatus, setParentStatus] = useState('');
+
+  const enrollmentLink = useMemo(() => {
+    if (!session || typeof window === 'undefined') {
+      return '';
+    }
+    const path = buildEnrollmentLink({
+      code: session.code,
+      deviceName,
+      platform,
+      oneTap,
+      enrollmentMode,
+    });
+    return `${window.location.origin}${path}`;
+  }, [session, deviceName, platform, oneTap, enrollmentMode]);
+
+  const parentLink = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return '';
+    }
+    return `${window.location.origin}/pairing`;
+  }, []);
+
+  const parentInstruction = useMemo(() => {
+    if (!parentLink) {
+      return '';
+    }
+    return `Open ${parentLink} to access the guardian pairing page.`;
+  }, [parentLink]);
+
+  const qrCodeUrl = useMemo(() => {
+    if (!enrollmentLink) {
+      return '';
+    }
+    return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
+      enrollmentLink
+    )}`;
+  }, [enrollmentLink]);
+
+  const parentQrCodeUrl = useMemo(() => {
+    if (!parentLink) {
+      return '';
+    }
+    return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
+      parentLink
+    )}`;
+  }, [parentLink]);
+
+  const refreshSession = async (nameOverride?: string) => {
+    const response = await fetch('/api/pairing', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        childName: nameOverride ?? childName,
+        enrollmentMode,
+      }),
+    });
+    const data = (await response.json()) as PairingSession;
+    setSession(data);
+    setStatus('');
+  };
+
+  useEffect(() => {
+    fetch('/api/pairing')
+      .then((response) => response.json())
+      .then((data: PairingSession) => {
+        setSession(data);
+        setEnrollmentMode(data.enrollmentMode ?? 'Demo (in-memory)');
+        setChildName(data.childName ?? 'Maya');
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!session) {
+      return undefined;
+    }
+    const timer = setInterval(
+      () => setSession((current) => (current ? { ...current } : current)),
+      1000
+    );
+    return () => clearInterval(timer);
+  }, [session]);
+
+  const handleCopy = async () => {
+    if (!enrollmentLink) {
+      return;
+    }
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(enrollmentLink);
+      setStatus('Enrollment link copied.');
+      return;
+    }
+    setStatus('Copy the link manually.');
+  };
+
+  const handleParentCopy = async () => {
+    if (!parentLink) {
+      return;
+    }
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(parentLink);
+      setParentStatus('Parent link copied.');
+      return;
+    }
+    setParentStatus('Copy the link manually.');
+  };
+
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
       <div className="space-y-6">
